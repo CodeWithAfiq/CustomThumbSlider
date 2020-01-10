@@ -38,7 +38,9 @@ class _CustomSliderState extends State<CustomSlider> {
   @override
   void initState() {
     loadImage('assets/thumb_db.png').then((image) {
-      customImage = image;
+      setState(() {
+        customImage = image;
+      });
     });
 
     super.initState();
@@ -70,17 +72,25 @@ class _CustomSliderState extends State<CustomSlider> {
 }
 
 class SliderThumbImage extends SliderComponentShape {
-
   final ui.Image image;
 
   SliderThumbImage(this.image);
 
-  @override Size getPreferredSize(bool isEnabled, bool isDiscrete) {
+  @override
+  Size getPreferredSize(bool isEnabled, bool isDiscrete) {
     return Size(0, 0);
   }
 
-  @override void paint(PaintingContext context, Offset center, {Animation<double> activationAnimation, Animation<double> enableAnimation, bool isDiscrete, TextPainter labelPainter, RenderBox parentBox, SliderThemeData sliderTheme, TextDirection textDirection, double value}) {
-
+  @override
+  void paint(PaintingContext context, Offset center,
+      {Animation<double> activationAnimation,
+      Animation<double> enableAnimation,
+      bool isDiscrete,
+      TextPainter labelPainter,
+      RenderBox parentBox,
+      SliderThemeData sliderTheme,
+      TextDirection textDirection,
+      double value}) {
     final canvas = context.canvas;
     final imageWidth = image?.width ?? 10;
     final imageHeight = image?.height ?? 10;
@@ -95,7 +105,5 @@ class SliderThumbImage extends SliderComponentShape {
     if (image != null) {
       canvas.drawImage(image, imageOffset, paint);
     }
-
   }
-
 }
